@@ -25,7 +25,7 @@ etiquetas_dinamicas = df_clasificacion['Riesgo'].to_dict()
 print("\n3. Creando ventanas de 60 días (Magnitud Absoluta)...")
 X, y = [], []
 VENTANA = 60
-retornos_absolutos = np.abs(retornos_totales) # Clave para que la LSTM entienda la volatilidad
+retornos_absolutos = np.abs(retornos_totales)
 
 for ticker, nivel_riesgo in etiquetas_dinamicas.items():
     datos_empresa = retornos_absolutos[ticker].values
@@ -36,7 +36,7 @@ for ticker, nivel_riesgo in etiquetas_dinamicas.items():
 X = np.array(X).reshape((-1, VENTANA, 1))
 y = to_categorical(np.array(y), num_classes=6)
 
-print("\n4. Entrenando Oráculo de Riesgo LSTM...")
+print("\n4. Entrenando modelo LSTM")
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 modelo = Sequential([
@@ -45,7 +45,7 @@ modelo = Sequential([
     LSTM(32, return_sequences=False),
     Dropout(0.2),
     Dense(32, activation='relu'),
-    Dense(6, activation='softmax') # Volvemos a probabilidad repartida (Riesgo 1 al 5)
+    Dense(6, activation='softmax')
 ])
 
 modelo.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])

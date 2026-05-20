@@ -10,7 +10,7 @@ import google.generativeai as genai
 # --- CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(page_title="Analizador Dual de Riesgo IA", page_icon="📈", layout="wide")
 
-# --- OCULTAR ICONOS DE ENLACE DE STREAMLIT (CSS NUCLEAR) ---
+# --- OCULTAR ICONOS DE ENLACE DE STREAMLIT ---
 st.markdown("""
     <style>
     /* Ocultar el icono de enlace en absolutamente todos los encabezados generados por Markdown */
@@ -159,14 +159,17 @@ if ticker:
             - Volatilidad Histórica Estructural: {volatilidad_5y:.2f}%
             
             INSTRUCCIONES PARA EL INFORME:
-            1. En el primer párrafo, analiza el comportamiento de corto plazo explicando qué significa el nivel de riesgo asignado por la LSTM en base a la volatilidad reciente.
-            2. En el segundo párrafo, introduce la perspectiva de largo plazo. Explica la paradoja de cómo un activo puede ser de riesgo muy alto a corto plazo (Nivel 4 o 5) pero presentar un crecimiento (CAGR) o eficiencia (Sharpe) excelentes si se mantiene en el tiempo.
-            3. Usa un tono académico, claro y estrictamente pedagógico. Destaca términos financieros clave en negrita. No des recomendaciones de compra o venta.
+            1. En el primer párrafo, analiza el comportamiento de corto plazo explicando qué significa el nivel de riesgo 
+            asignado por la LSTM en base a la volatilidad reciente.
+            2. En el segundo párrafo, introduce la perspectiva de largo plazo. Explica la paradoja de cómo un activo puede 
+            ser de riesgo muy alto a corto plazo (Nivel 4 o 5) pero presentar un crecimiento (CAGR) o eficiencia (Sharpe) 
+            excelentes si se mantiene en el tiempo.
+            3. Usa un tono académico, claro y estrictamente pedagógico. Destaca términos financieros clave en negrita. 
+            No des recomendaciones de compra o venta.
             """
             
             with st.spinner("Generando análisis pedagógico de doble horizonte..."):
                 try:
-                    # NOTA: Asegúrate de usar gemini-3-flash o gemini-1.5-flash según la versión de tu API
                     model = genai.GenerativeModel('gemini-2.5-flash') 
                     response = model.generate_content(prompt)
                     st.info(response.text)

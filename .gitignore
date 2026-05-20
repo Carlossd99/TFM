@@ -2,13 +2,13 @@
 venv/
 env/
 
-# Archivos de variables de entorno (¡CRÍTICO PARA LA SEGURIDAD!)
+# Archivos de variables de entorno
 .env
 
-# Archivos compilados de Python (Basura del sistema)
+# Archivos compilados de Python
 __pycache__/
 *.pyc
 
-# Archivos del sistema operativo (Opcional, útil si usas Mac o Windows)
+# Archivos del sistema operativo 
 .DS_Store
 Thumbs.db
