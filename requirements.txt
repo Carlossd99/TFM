@@ -6,3 +6,5 @@ scikit-learn
 google-generativeai
 python-dotenv
 tensorflow
+matplotlib
+seaborn
